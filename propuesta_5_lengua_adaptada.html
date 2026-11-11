@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta 5 - Lengua Adaptada (1º ESO / Primaria)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .card-flip { perspective: 1000px; }
+        .card-inner { transition: transform 0.6s; transform-style: preserve-3d; }
+        .card-flip.flipped .card-inner { transform: rotateY(180deg); }
+        .card-front, .card-back { backface-visibility: hidden; }
+        .card-back { transform: rotateY(180deg); }
+        .tab-btn.active { background-color: #e11d48; color: white; border-color: #e11d48; }
+    </style>
+</head>
+<body class="bg-rose-50 min-h-screen text-slate-800 font-sans pb-12">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+            <h1 class="text-xl md:text-2xl font-black text-rose-600 flex items-center gap-2">
+                🔴 Cuaderno 5: Historias del Mercado
+            </h1>
+            <nav class="flex flex-wrap gap-2 justify-center">
+                <button onclick="switchTab('teoria')" id="btn-teoria" class="tab-btn active px-3 py-2 rounded-xl text-xs md:text-sm font-bold border border-slate-300 bg-white hover:bg-rose-50 transition">📖 Teoría</button>
+                <button onclick="switchTab('ficha1')" id="btn-ficha1" class="tab-btn px-3 py-2 rounded-xl text-xs md:text-sm font-bold border border-slate-300 bg-white hover:bg-rose-50 transition">📝 Ficha 1</button>
+                <button onclick="switchTab('ficha2')" id="btn-ficha2" class="tab-btn px-3 py-2 rounded-xl text-xs md:text-sm font-bold border border-slate-300 bg-white hover:bg-rose-50 transition">🔤 Ficha 2</button>
+                <button onclick="switchTab('ficha3')" id="btn-ficha3" class="tab-btn px-3 py-2 rounded-xl text-xs md:text-sm font-bold border border-slate-300 bg-white hover:bg-rose-50 transition">💬 Ficha 3</button>
+                <button onclick="switchTab('ficha4')" id="btn-ficha4" class="tab-btn px-3 py-2 rounded-xl text-xs md:text-sm font-bold border border-slate-300 bg-white hover:bg-rose-50 transition">🏷️ Ficha 4</button>
+                <button onclick="switchTab('ficha5')" id="btn-ficha5" class="tab-btn px-3 py-2 rounded-xl text-xs md:text-sm font-bold border border-slate-300 bg-white hover:bg-rose-50 transition">✏️ Ficha 5</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 mt-6">
+
+        <!-- TEORÍA -->
+        <div id="sec-teoria" class="space-y-8">
+            <div class="bg-rose-600 text-white p-6 rounded-2xl shadow-sm">
+                <h2 class="text-2xl font-black mb-2">📚 Cuaderno de Estudio Adaptado - Nivel 5</h2>
+                <p class="text-rose-100">Haz clic en las tarjetas de memoria interactiva para repasar el temario.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <h3 class="text-xl font-bold text-rose-700 mb-4">🔤 10 Palabras del Día</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="teoria-cards"></div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <h3 class="text-xl font-bold text-rose-700 mb-4">💬 Refranes Castellanos</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="teoria-refranes"></div>
+            </div>
+        </div>
+
+        <!-- FICHA 1: LECTURA (93 PALABRAS EXÁCTAS) -->
+        <div id="sec-ficha1" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full">FICHA 1 (5 EJERCICIOS)</span>
+                <h2 class="text-2xl font-bold text-slate-800 mt-2 mb-4">📖 Lectura: El comerciante del mercado</h2>
+                
+                <div class="bg-rose-50 p-5 rounded-xl border border-rose-200 text-slate-700 leading-relaxed mb-6 font-medium">
+                    <p>En el mercado del pueblo vivía un hombre conocido por ser un gran <b>usurero</b>. Le gustaba mucho presumir y prometer ayuda a sus vecinos, pero siempre terminaba por <b>cacarear y no poner huevos</b>. Un día, al ver una discusión acalorada entre dos compradores, intentó <b>hacer sangre</b> recordando viejos rencores. Sin embargo, un anciano sabio intervino y le dijo calmadamente: "Si vienes a protestar por las normas, ya sabes: <b>a reclamar, al maestro armero</b>". El usurero, sorprendido por la contundente respuesta, decidió marcharse del lugar caminando con una inusual <b>parsimonia</b>.</p>
+                    <span class="block mt-2 text-xs font-bold text-rose-600 text-right">Texto adaptado: 93 palabras</span>
+                </div>
+
+                <form id="form-f1" class="space-y-6">
+                    <div class="q-block" data-q="f1-1">
+                        <label class="font-bold text-slate-700 block mb-2">1. ¿Qué forma de actuar tenía el usurero según la lectura?</label>
+                        <select name="f1-1" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Le gustaba cobrar de más y presumir, pero no cumplía sus promesas</option>
+                            <option value="incorrecta1">Regalaba comida a todos los necesitados</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f1-2">
+                        <label class="font-bold text-slate-700 block mb-2">2. ¿Qué significa que solía "cacarear y no poner huevos"?</label>
+                        <select name="f1-2" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Que hablaba mucho sobre lo que haría pero luego no hacía nada</option>
+                            <option value="incorrecta1">Que tenía una granja de gallinas</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f1-3">
+                        <label class="font-bold text-slate-700 block mb-2">3. ¿Qué intentó hacer el usurero durante la discusión del mercado?</label>
+                        <select name="f1-3" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Hacer sangre (meterse para empeorar la pelea recordando rencores)</option>
+                            <option value="incorrecta1">Invitar a todos a comer pastel</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f1-4">
+                        <label class="font-bold text-slate-700 block mb-2">4. ¿Qué le dio a entender el sabio con la frase "A reclamar, al maestro armero"?</label>
+                        <select name="f1-4" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Que las reglas eran fijas y no servía de nada quejarse</option>
+                            <option value="incorrecta1">Que debía ir a comprar pistolas</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f1-5">
+                        <label class="font-bold text-slate-700 block mb-2">5. ¿De qué manera se marchó el usurero al final del relato?</label>
+                        <select name="f1-5" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Con mucha parsimonia (con paso lento y pausado)</option>
+                            <option value="incorrecta1">Corriendo a toda velocidad</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <button type="button" onclick="corregirFicha1()" class="w-full bg-rose-600 text-white font-bold py-3 rounded-xl hover:bg-rose-700 transition">Comprobar Ficha 1</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- FICHA 2: VOCABULARIO (5 EJERCICIOS) -->
+        <div id="sec-ficha2" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full">FICHA 2 (5 EJERCICIOS)</span>
+                <h2 class="text-2xl font-bold text-slate-800 mt-2 mb-4">🔤 Vocabulario y Definiciones</h2>
+                
+                <form id="form-f2" class="space-y-6">
+                    <div class="q-block" data-q="f2-1">
+                        <label class="font-bold text-slate-700 block mb-2">1. ¿Qué es un <b>HIRCOCERVO</b>?</label>
+                        <select name="f2-1" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Un animal fantástico e imaginario mitológico</option>
+                            <option value="incorrecta1">Un reptil del desierto</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f2-2">
+                        <label class="font-bold text-slate-700 block mb-2">2. ¿Qué significa la palabra <b>DÁDIVA</b>?</label>
+                        <select name="f2-2" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Un regalo hecho de manera voluntaria y generosa</option>
+                            <option value="incorrecta1">Una obligación de pago</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f2-3">
+                        <label class="font-bold text-slate-700 block mb-2">3. ¿Qué representa una persona <b>APÁTRIDA</b>?</label>
+                        <select name="f2-3" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Alguien que no posee patria ni nacionalidad</option>
+                            <option value="incorrecta1">Un deportista olímpico</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f2-4">
+                        <label class="font-bold text-slate-700 block mb-2">4. ¿Cuál es el <b>SINÓNIMO</b> de <b>SOLEMNE</b>?</label>
+                        <select name="f2-4" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Formal, ceremonial u oficial</option>
+                            <option value="incorrecta1">Desordenado</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f2-5">
+                        <label class="font-bold text-slate-700 block mb-2">5. ¿Qué significa la palabra <b>CÓN-SUL</b>?</label>
+                        <select name="f2-5" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Persona autorizada que representa a su gobierno en otro país</option>
+                            <option value="incorrecta1">Un vendedor de coches</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <button type="button" onclick="corregirFicha2()" class="w-full bg-rose-600 text-white font-bold py-3 rounded-xl hover:bg-rose-700 transition">Comprobar Ficha 2</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- FICHA 3: REFRANES (5 EJERCICIOS) -->
+        <div id="sec-ficha3" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full">FICHA 3 (5 EJERCICIOS)</span>
+                <h2 class="text-2xl font-bold text-slate-800 mt-2 mb-4">💬 Explicación de Refranes</h2>
+                
+                <form id="form-f3" class="space-y-6">
+                    <div class="q-block" data-q="f3-1">
+                        <label class="font-bold text-slate-700 block mb-2">1. ¿Qué expresa el dicho <i>"Ser un bala perdida"</i>?</label>
+                        <select name="f3-1" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Ser una persona irresponsable o con mal comportamiento</option>
+                            <option value="incorrecta1">Perder un objeto valioso</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f3-2">
+                        <label class="font-bold text-slate-700 block mb-2">2. ¿Qué significa el dicho <i>"¡Que venga Dios y lo vea!"</i>?</label>
+                        <select name="f3-2" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Muestra de asombro enorme ante algo increíble o injusto</option>
+                            <option value="incorrecta1">Ir a la iglesia a rezar</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f3-3">
+                        <label class="font-bold text-slate-700 block mb-2">3. ¿Qué quiere decir lograr un objetivo <i>"A pulso"</i>?</label>
+                        <select name="f3-3" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Haberlo alcanzado únicamente con tu esfuerzo personal</option>
+                            <option value="incorrecta1">Recibir ayuda de todo el mundo</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f3-4">
+                        <label class="font-bold text-slate-700 block mb-2">4. ¿A qué se refiere la frase <i>"Pan y toros"</i>?</label>
+                        <select name="f3-4" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Ofrecer espectáculos simples para distraer a la masa</option>
+                            <option value="incorrecta1">Ir a almorzar al campo</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f3-5">
+                        <label class="font-bold text-slate-700 block mb-2">5. ¿Qué significa usar <i>"El truco del almendruco"</i>?</label>
+                        <select name="f3-5" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Aplicar una solución práctica, hábil e ingeniosa</option>
+                            <option value="incorrecta1">Preparar un dulce de almendras</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <button type="button" onclick="corregirFicha3()" class="w-full bg-rose-600 text-white font-bold py-3 rounded-xl hover:bg-rose-700 transition">Comprobar Ficha 3</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- FICHA 4: SUSTANTIVOS (5 EJERCICIOS) -->
+        <div id="sec-ficha4" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full">FICHA 4 (5 EJERCICIOS)</span>
+                <h2 class="text-2xl font-bold text-slate-800 mt-2 mb-4">🏷️ Clasificación de Sustantivos</h2>
+                
+                <form id="form-f4" class="space-y-6">
+                    <div class="q-block" data-q="f4-1">
+                        <label class="font-bold text-slate-700 block mb-2">1. La palabra <b>Mercado</b> es un sustantivo...</label>
+                        <select name="f4-1" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Común y Concreto (nombra un lugar visible que podemos tocar)</option>
+                            <option value="incorrecta1">Propio y Abstracto</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f4-2">
+                        <label class="font-bold text-slate-700 block mb-2">2. La palabra <b>Tranquilidad</b> es un sustantivo...</label>
+                        <select name="f4-2" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Abstracto (representa un estado de ánimo o idea)</option>
+                            <option value="incorrecta1">Concreto</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f4-3">
+                        <label class="font-bold text-slate-700 block mb-2">3. La palabra <b>Pedro</b> es un sustantivo...</label>
+                        <select name="f4-3" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Propio (nombre propio escrito con mayúscula inicial)</option>
+                            <option value="incorrecta1">Común</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f4-4">
+                        <label class="font-bold text-slate-700 block mb-2">4. La palabra <b>Moneda</b> es un sustantivo...</label>
+                        <select name="f4-4" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Común y Concreto (objeto físico tangible)</option>
+                            <option value="incorrecta1">Propio</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f4-5">
+                        <label class="font-bold text-slate-700 block mb-2">5. La palabra <b>Enojo</b> es un sustantivo...</label>
+                        <select name="f4-5" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Abstracto (expresa una emoción interna no física)</option>
+                            <option value="incorrecta1">Concreto</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <button type="button" onclick="corregirFicha4()" class="w-full bg-rose-600 text-white font-bold py-3 rounded-xl hover:bg-rose-700 transition">Comprobar Ficha 4</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- FICHA 5: ORTOGRAFÍA (5 EJERCICIOS) -->
+        <div id="sec-ficha5" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full">FICHA 5 (5 EJERCICIOS)</span>
+                <h2 class="text-2xl font-bold text-slate-800 mt-2 mb-4">✏️ Tildes y Ortografía</h2>
+                
+                <form id="form-f5" class="space-y-6">
+                    <div class="q-block" data-q="f5-1">
+                        <label class="font-bold text-slate-700 block mb-2">1. ¿Por qué la palabra <b>USU-RE-RO</b> no lleva tilde?</label>
+                        <select name="f5-1" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Porque es una palabra llana que termina en vocal O</option>
+                            <option value="incorrecta1">Porque es esdrújula</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f5-2">
+                        <label class="font-bold text-slate-700 block mb-2">2. ¿Qué sílaba lleva el acento en las palabras <b>ESDRÚJULAS</b>?</label>
+                        <select name="f5-2" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">En la antepenúltima sílaba (contando desde el final)</option>
+                            <option value="incorrecta1">En la última sílaba</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f5-3">
+                        <label class="font-bold text-slate-700 block mb-2">3. ¿Cómo se clasifica la palabra <b>CAN-CIÓN</b>?</label>
+                        <select name="f5-3" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Aguda (lleva tilde en la O por terminar en la letra N)</option>
+                            <option value="incorrecta1">Llana</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f5-4">
+                        <label class="font-bold text-slate-700 block mb-2">4. ¿Lleva tilde la palabra <b>CÁR-CEL</b> (Cárcel)?</label>
+                        <select name="f5-4" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">SÍ, porque es llana terminada en la letra L</option>
+                            <option value="incorrecta1">NO, porque es aguda</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <div class="q-block" data-q="f5-5">
+                        <label class="font-bold text-slate-700 block mb-2">5. ¿Cómo se divide en sílabas la palabra <b>SÁ-BA-DO</b> y de qué tipo es?</label>
+                        <select name="f5-5" class="w-full p-3 rounded-xl border border-slate-300">
+                            <option value="">-- Selecciona --</option>
+                            <option value="correcta">Sá-ba-do (Esdrújula, por lo que lleva tilde siempre)</option>
+                            <option value="incorrecta1">Sa-ba-do (Llana)</option>
+                        </select>
+                        <div class="feedback hidden mt-2 p-3 rounded-lg text-sm"></div>
+                    </div>
+
+                    <button type="button" onclick="corregirFicha5()" class="w-full bg-rose-600 text-white font-bold py-3 rounded-xl hover:bg-rose-700 transition">Comprobar Ficha 5</button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        const vocabularioTeoria = [
+            { palabra: "Parsimonia", def: "Calma y lentitud extrema.", sim: "Calma", ant: "Prisa" },
+            { palabra: "Cónsul", def: "Representante de un país en el extranjero.", sim: "Representante", ant: "-" },
+            { palabra: "Solemne", def: "Muy serio, formal y oficial.", sim: "Formal", ant: "Informal" },
+            { palabra: "Apátrida", def: "Persona que no tiene patria o país oficial.", sim: "Sin patria", ant: "-" },
+            { palabra: "Efímero", def: "Que dura muy poco tiempo.", sim: "Pasajero", ant: "Eterno" },
+            { palabra: "Dádiva", def: "Un regalo hecho con buena intención.", sim: "Regalo", ant: "-" },
+            { palabra: "Hircocervo", def: "Animal fantástico (cabra y ciervo).", sim: "Quimera", ant: "Real" },
+            { palabra: "Clandestino", def: "Secreto o escondido de la ley.", sim: "Oculto", ant: "Público" },
+            { palabra: "Anhelar", def: "Desear algo con mucha fuerza.", sim: "Desear", ant: "Detestar" },
+            { palabra: "Usurero", def: "Persona que presta dinero cobrando de más.", sim: "Prestamista", ant: "-" }
+        ];
+
+        const refranesTeoria = [
+            { ref: "¡A buenas horas, mangas verdes!", exp: "Llegar cuando ya se resolvió todo solo." },
+            { ref: "A reclamar, al maestro armero", exp: "Que ya no hay opción a protestar." },
+            { ref: "A pulso", exp: "Lograr algo solo con tu propio esfuerzo." },
+            { ref: "Cacarear y no poner huevos", exp: "Hablar mucho y hacer nada." },
+            { ref: "El truco del almendruco", exp: "Un truco fácil e ingenioso." },
+            { ref: "Pan y toros", exp: "Tener a la gente distraída con fiesta." },
+            { ref: "Ser un bala perdida", exp: "Ser travieso o irresponsable." },
+            { ref: "Tabla de salvación", exp: "La última ayuda en un problema." },
+            { ref: "Que venga Dios y lo vea", exp: "Algo increíble o sorprendente." },
+            { ref: "Hacer sangre", exp: "Hacer daño insistiéndole a alguien." }
+        ];
+
+        const containerCards = document.getElementById('teoria-cards');
+        vocabularioTeoria.forEach(item => {
+            const card = document.createElement('div');
+            card.className = "card-flip h-32 cursor-pointer";
+            card.onclick = () => card.classList.toggle('flipped');
+            card.innerHTML = `
+                <div class="card-inner relative w-full h-full text-center rounded-xl shadow-sm">
+                    <div class="card-front absolute w-full h-full bg-rose-600 text-white flex flex-col items-center justify-center p-3 rounded-xl">
+                        <span class="font-bold text-base">${item.palabra}</span>
+                        <span class="text-[11px] opacity-80 mt-1">(Toca para girar)</span>
+                    </div>
+                    <div class="card-back absolute w-full h-full bg-white text-slate-800 flex flex-col items-center justify-center p-3 rounded-xl border border-rose-300">
+                        <p class="text-xs font-medium">${item.def}</p>
+                    </div>
+                </div>
+            `;
+            containerCards.appendChild(card);
+        });
+
+        const containerRefranes = document.getElementById('teoria-refranes');
+        refranesTeoria.forEach(r => {
+            const div = document.createElement('div');
+            div.className = "p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs";
+            div.innerHTML = `<b class="text-rose-700">${r.ref}:</b> ${r.exp}`;
+            containerRefranes.appendChild(div);
+        });
+
+        function switchTab(tabId) {
+            ['teoria', 'ficha1', 'ficha2', 'ficha3', 'ficha4', 'ficha5'].forEach(s => {
+                document.getElementById('sec-' + s).classList.add('hidden');
+                document.getElementById('btn-' + s).classList.remove('active');
+            });
+            document.getElementById('sec-' + tabId).classList.remove('hidden');
+            document.getElementById('btn-' + tabId).classList.add('active');
+        }
+
+        function evaluar(qName, exp) {
+            const select = document.querySelector(`select[name="${qName}"]`);
+            const feedback = document.querySelector(`[data-q="${qName}"] .feedback`);
+            feedback.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800');
+            if (select.value === 'correcta') {
+                feedback.classList.add('bg-emerald-100', 'text-emerald-800');
+                feedback.innerHTML = `<b>¡Muy bien! 🎉</b> ${exp}`;
+            } else if (select.value === '') {
+                feedback.classList.add('bg-rose-100', 'text-rose-800');
+                feedback.innerHTML = `<b>⚠️ Por favor selecciona una respuesta.</b>`;
+            } else {
+                feedback.classList.add('bg-rose-100', 'text-rose-800');
+                feedback.innerHTML = `<b>Explicación 💡:</b> ${exp}`;
+            }
+        }
+
+        function corregirFicha1() {
+            evaluar('f1-1', "Usurero es quien cobra dinero abusivo cuando presta algo.");
+            evaluar('f1-2', "Cacarear y no poner huevos expresa hablar mucho pero no cumplir.");
+            evaluar('f1-3', "Hacer sangre significa empeñarse en herir en una discusión.");
+            evaluar('f1-4', "Indica que la norma no cambiará por más reclamaciones que se hagan.");
+            evaluar('f1-5', "Parsimonia se refiere a andar con sosiego y extrema calma.");
+        }
+        function corregirFicha2() {
+            evaluar('f2-1', "El hircocervo es una quimera mitológica (cabra y ciervo).");
+            evaluar('f2-2', "Una dádiva es un regalo voluntario.");
+            evaluar('f2-3', "Apátrida designa a quien no posee país legal.");
+            evaluar('f2-4', "Solemne equivale a ceremonial y formal.");
+            evaluar('f2-5', "Un cónsul representa a su país en el exterior.");
+        }
+        function corregirFicha3() {
+            evaluar('f3-1', "Persona con comportamiento irresponsable o travieso.");
+            evaluar('f3-2', "Muestra asombro grande ante un hecho indignante.");
+            evaluar('f3-3', "Lograr algo solo con el esfuerzo personal.");
+            evaluar('f3-4', "Ofrecer espectáculo fácil para entretener a la multitud.");
+            evaluar('f3-5', "Solución hábil e ingeniosa.");
+        }
+        function corregirFicha4() {
+            evaluar('f4-1', "Mercado es un lugar visible percibido por los sentidos.");
+            evaluar('f4-2', "La tranquilidad no es física, por lo que es abstracta.");
+            evaluar('f4-3', "Pedro es un sustantivo propio con mayúscula.");
+            evaluar('f4-4', "Moneda es común y concreto (se toca físicamente).");
+            evaluar('f4-5', "Enojo representa un estado emocional no tangible.");
+        }
+        function corregirFicha5() {
+            evaluar('f5-1', "U-su-re-ro es llana y acaba en vocal O, por eso NO lleva tilde.");
+            evaluar('f5-2', "Las esdrújulas llevan acento en la antepenúltima sílaba.");
+            evaluar('f5-3', "Canción es aguda y lleva tilde por terminar en N.");
+            evaluar('f5-4', "Cárcel es llana y lleva tilde por terminar en L.");
+            evaluar('f5-5', "Sá-ba-do es esdrújula y por regla siempre lleva tilde.");
+        }
+    </script>
+</body>
+</html>
